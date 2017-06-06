@@ -17,6 +17,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static okhttp3.logging.HttpLoggingInterceptor.Level.BODY;
@@ -32,6 +33,7 @@ public class Injector {
         return new Retrofit.Builder()
                 .baseUrl( baseUrl )
                 .client( provideOkHttpClient() )
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory( GsonConverterFactory.create() )
                 .build();
     }

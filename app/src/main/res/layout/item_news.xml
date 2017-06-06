@@ -6,7 +6,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="itemViewModel"
             type="com.imjaspreet.mvvmpattern.ui.main.modelView.ItemNewsViewModel" />
     </data>
 
@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?attr/selectableItemBackground"
-            android:onClick="@{viewModel.onItemClick}"
+            android:onClick="@{itemViewModel.onItemClick}"
             android:orientation="vertical">
 
             <TextView
@@ -37,7 +37,6 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="12dp"
-                android:text="@{viewModel.name}"
                 android:textSize="20sp"
                 tools:text="Repository Name" />
 
@@ -49,7 +48,6 @@
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
                 android:paddingTop="10dp"
-                android:text="@{viewModel.description}"
                 android:textColor="@color/secondary_text"
                 android:textSize="14sp"
                 tools:text="This is where the repository description will go" />

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by jaspreet on 06/06/17.
  */
@@ -12,6 +15,7 @@ import android.net.NetworkInfo;
 public class App extends Application{
 
     private static App instance;
+    private Scheduler defaultSubscribeScheduler;
 
     @Override
     public void onCreate() {
@@ -37,4 +41,10 @@ public class App extends Application{
         return networkInfo != null && networkInfo.isConnected();
     }
 
+    public Scheduler defaultSubscribeScheduler() {
+        if (defaultSubscribeScheduler == null) {
+            defaultSubscribeScheduler = Schedulers.io();
+        }
+        return defaultSubscribeScheduler;
+    }
 }
