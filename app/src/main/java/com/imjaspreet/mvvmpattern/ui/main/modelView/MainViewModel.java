@@ -3,6 +3,7 @@ package com.imjaspreet.mvvmpattern.ui.main.modelView;
 import android.content.Context;
 import android.databinding.ObservableInt;
 import android.view.View;
+import android.widget.Toast;
 
 import com.imjaspreet.mvvmpattern.App;
 import com.imjaspreet.mvvmpattern.data.Injector;
@@ -51,6 +52,12 @@ public class MainViewModel implements ViewModel{
     }
 
     private void loadNews(){
+
+        if(!App.hasNetwork()){
+            Toast.makeText(context, "Please check internet connection.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         progressVisibility.set(View.VISIBLE);
         getNewsButtonVisibility.set(View.INVISIBLE);
         recyclerViewVisibility.set(View.INVISIBLE);
@@ -71,6 +78,7 @@ public class MainViewModel implements ViewModel{
                     @Override
                     public void onError(Throwable e) {
                         progressVisibility.set(View.INVISIBLE);
+                        getNewsButtonVisibility.set(View.VISIBLE);
 
                     }
 
