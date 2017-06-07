@@ -16,6 +16,6 @@ public interface InterfaceApi {
     public final static String BASE_URL = "https://www.reddit.com";
 
     @GET("/top.json")
-    Observable<RedditNewsResponse> getTop(@Query("after") String after, @Query("limit") String limit);
+    Observable<RedditNewsResponse> getTop(@Query("limit") String limit);
 
 }

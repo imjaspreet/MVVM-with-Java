@@ -37,7 +37,6 @@ public class MainViewModel implements ViewModel{
         getNewsButtonVisibility = new ObservableInt(View.VISIBLE);
     }
 
-
     @Override
     public void destroy() {
         if (disposable != null && !disposable.isDisposed()) disposable.dispose();
@@ -57,7 +56,7 @@ public class MainViewModel implements ViewModel{
         recyclerViewVisibility.set(View.INVISIBLE);
 
         InterfaceApi api = Injector.provideApi();
-        disposable = api.getTop("", "")
+        disposable = api.getTop("10")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(App.getInstance().defaultSubscribeScheduler())
                 .subscribeWith(new DisposableObserver<RedditNewsResponse>() {
