@@ -6,9 +6,9 @@ import java.util.List;
  * Created by jaspreet on 06/06/17.
  */
 
-public class RedditDataResponse {
+public class RedditData {
 
-    public List<RedditChildrenResponse> children;
+    public List<RedditChildren> children;
     public String after;
     public String before;
 }

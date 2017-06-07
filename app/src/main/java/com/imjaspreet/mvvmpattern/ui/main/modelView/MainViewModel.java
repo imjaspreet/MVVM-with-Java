@@ -7,6 +7,7 @@ import android.view.View;
 import com.imjaspreet.mvvmpattern.App;
 import com.imjaspreet.mvvmpattern.data.Injector;
 import com.imjaspreet.mvvmpattern.data.InterfaceApi;
+import com.imjaspreet.mvvmpattern.data.model.RedditData;
 import com.imjaspreet.mvvmpattern.data.model.RedditNewsResponse;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,11 +25,13 @@ public class MainViewModel implements ViewModel{
     public ObservableInt getNewsButtonVisibility;
 
     private Context context;
+    private DataListener dataListener;
     private DisposableObserver disposable;
 
-    public MainViewModel(Context context) {
+    public MainViewModel(Context context, DataListener dataListener) {
 
         this.context = context;
+        this.dataListener = dataListener;
         progressVisibility = new ObservableInt(View.INVISIBLE);
         recyclerViewVisibility = new ObservableInt(View.INVISIBLE);
         getNewsButtonVisibility = new ObservableInt(View.VISIBLE);
@@ -40,6 +43,7 @@ public class MainViewModel implements ViewModel{
         if (disposable != null && !disposable.isDisposed()) disposable.dispose();
         disposable = null;
         context = null;
+        dataListener = null;
     }
 
     public void onClickGetNews(View view) {
@@ -59,7 +63,10 @@ public class MainViewModel implements ViewModel{
                 .subscribeWith(new DisposableObserver<RedditNewsResponse>() {
                     @Override
                     public void onNext(RedditNewsResponse value) {
-                        progressVisibility.set(View.INVISIBLE);
+                        if (dataListener != null) dataListener.onRepositoriesChanged(value.data);
+                        if (!value.data.children.isEmpty()) {
+                            recyclerViewVisibility.set(View.VISIBLE);
+                        }
                     }
 
                     @Override
@@ -74,4 +81,9 @@ public class MainViewModel implements ViewModel{
                     }
                 });
     }
+
+    public interface DataListener {
+        void onRepositoriesChanged(RedditData response);
+    }
+
 }

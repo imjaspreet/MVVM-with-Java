@@ -6,5 +6,5 @@ package com.imjaspreet.mvvmpattern.data.model;
 
 public class RedditNewsResponse {
 
-    public RedditDataResponse data;
+    public RedditData data;
 }

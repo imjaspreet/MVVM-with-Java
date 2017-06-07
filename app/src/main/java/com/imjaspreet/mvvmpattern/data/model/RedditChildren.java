@@ -4,7 +4,7 @@ package com.imjaspreet.mvvmpattern.data.model;
  * Created by jaspreet on 06/06/17.
  */
 
-public class RedditChildrenResponse {
+public class RedditChildren {
 
-    public RedditNewsDataResponse data;
+    public RedditNewsData data;
 }
